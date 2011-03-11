@@ -28,6 +28,11 @@
 "      Initial version
 "
 
+if exists ("b:did_ftplugin_pnote")
+   finish
+endif
+let b:did_ftplugin_pnote = 1
+
 setlocal foldexpr=Pnote_getFoldLevel(v:lnum)
 setlocal fdm=expr
 setlocal fdi=";"

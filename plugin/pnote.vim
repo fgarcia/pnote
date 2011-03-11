@@ -2,7 +2,7 @@
 "
 " File: Power Note for Vim
 "
-" Author: Francisco Garcia Rodriguez <public@francisco-garcia.net>
+" Author: Francisco Garcia Rodriguez <francisco.garcia.100@gmail.com>
 "
 " Licence: Copyright (C) 2010 Francisco Garcia Rodriguez
 " This program is free software: you can redistribute it and/or
@@ -16,9 +16,6 @@
 " 
 " Repository: git@github.com:FGarcia/Vim.git (pnote subfolder)
 "
-" BUGS:
-"   - Folding function is not tab friendly
-"
 " Files:    
 "       plugin/pnote.vim
 "       syntax/pnote.vim
@@ -27,10 +24,6 @@
 " Version:  0.1 (Alpha)
 "
 " History:
-"   v0.2x ???
-"       Contact info update
-"       BUG list
-"
 "   v0.1  2010-05-23
 "      Initial version
 " ------------------------------------------------------------------------------
@@ -72,7 +65,7 @@ function! Pnote_getSectionColumn(lineNum)
         return lineCol
     endif
 
-    let markerPos = match (lineText,'[@;]')
+    let markerPos = match (lineText,';')
     if markerPos == lineCol
         " Line starting with a section marker
         return markerPos
