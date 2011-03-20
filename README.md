@@ -1,7 +1,7 @@
 This tiny script provides the syntax, folding function and other minor
 functionality that I need for my notes.
 
-I try to keep al my notes in simple plain ASCII text files. However I admit
+I try to keep all my notes in simple plain ASCII text files. However I admit
 that some formating and folding is nice. Hence I came up with a very simple
 syntax based on some markers and indentation rules, wrap all that together into
 this Vim script and Voilà! Now I can keep my text notes within a compressed
