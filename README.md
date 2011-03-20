@@ -9,6 +9,8 @@ style and smart folding along the power of Vim to ease the access to my notes.
 
 ![screen shot](https://github.com/FGarcia/pnote/raw/master/screenshot.png)
 
+I strongly recommend the [UTL](http://vim.sourceforge.net/scripts/script.php?script_id=293) script 
+
 I am too lazy to write the documentation, but the syntax is so simple that you
 can get an idea by playing with the [sample
 file](https://github.com/FGarcia/pnote/blob/master/git-pnote-example.txt). You
