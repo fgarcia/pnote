@@ -1,0 +1,147 @@
+# Start and config
+    ; Useful stuff
+    $ git config --system core.autocrlf false
+    $ git config --global core.autocrlf false
+
+    core.autocrlf false       -- Do not convert line-ends (Windows)
+    color.ui always           -- Color interface
+    merge.tool gvimdiff  
+    clean.requireForce true   -- git clean will not work without extras
+
+    ; Create a new repositry
+        $ git init
+        $ git add .
+        $ git commit
+
+    ; Create a central shared repository
+        $ git init --bare --shared 
+
+    ; If you already have a repository
+        ; Make en exact copy with tags and branches
+        git push ssh://example.org/git/foo.git '*:*'
+ 
+        ; Copy/duplicate/clone 
+        $ git clone ssh://you@host.org/proj.git
+# Keywords
+    master     ; default development branch
+    origin     ; default upstream repository
+    HEAD^^     ; parent of HEAD
+    HEAD^^     ; grandparent of HEAD
+
+    HEAD^4     ; great-great grandparent of HEAD
+    HEAD~4     ; great-great grandparent of HEAD
+    HEAD@{4}   ; great-great grandparent of HEAD
+
+    master@{yesterday}
+    master@{1 month ago}
+
+# Commit
+    ; Recover/revert lost file
+    git checkout file
+    git checkout 268b4206 -- Makefile.in    # checkout Makefile.in with blob number
+    git checkout v1.2.3 -- filename         # tag v1.2.3
+    git checkout stable -- filename         # stable branch
+    git checkout origin/master -- filename  # upstream master
+    git checkout HEAD -- filename           # the version from the most recent commit
+    git checkout HEAD^ -- filename          # the version before the most recent commit
+
+    ; Have not commited and want to revert everything
+    $ git reset --hard
+
+    ; take the last commit back (keep working tree)
+    $ git reset --soft HEAD^  
+    $ git checkout myfile.txt
+    $ git checkout -- path/file.txt
+    $ git commit --amend      ; Re-enter last commit
+
+    ; Forgot something in your last commit? 
+    $ git reset --soft HEAD^
+    $ git add forgot.txt these.txt
+    $ git commit
+
+# Work with a remote Git
+    git clone /home/alice bob    ; Clone a copy of Alice
+    git pull /home/bob master    ; fetch & merge Bob's master branch into HEAD
+
+    git remote add bob /home/bob ; Make "bob" a shortcut
+    git pull bob                 ; Merge Bob with a shortcut
+    git pull                     ; The "svn update" considering last path
+    git push                     ; Push changes to origin
+
+    git fetch /home/bob master      ; Inspect Bob's changes before merge/pull
+    git log -p HEAD..FETCH_HEAD
+
+    git push origin tagname     ; Push tagname to remote location (even deletions)
+
+# Merge conflicts
+    git diff
+    git diff --base $file
+    git diff --ours $file
+    git diff --theirs $file
+ 
+    git add conflict_file.txt       ; Solve conflict
+    git rebase --continue
+
+    git reset --hard                ; Discard conflict
+    git rebase --skip
+
+    git checkout --ours index.html
+    git checkout --theirs _layouts/default.html
+
+    ; Merge repositores A, B, C
+        mkdir combined && cd combined
+        git init
+        git fetch ../A master:A
+        git fetch ../B master:B
+        git fetch ../C master:C 
+        git checkout A
+        git merge B
+        git merge C 
+
+# Recepies
+    ; Stash use
+        # You must switch to another branch but cannot commit now
+        git stash list
+        git stash save "your message here"
+        gitk stash
+
+        # now switch, work and some time later go back to your working branch
+        git stash pop
+
+        # also you might like to research...
+        git diff stash@{0}
+        git stash apply stash@{1}
+        git stash drop stash@{1}
+
+    ; Daily work with branch/rebase*/merge
+    Use rebase to keep your branch updated with the stuff people is doing.
+    The idea is to keep working in something as similar as possible to the trunk
+    and have as few differences as possible for an easy final merge
+
+        # clone the remote repo
+        $ git co -b my_new_feature
+        # ..work and commit some stuff
+        $ git rebase master
+        # ..work and commit some stuff
+        $ git rebase master
+        # ..finish the feature
+        $ git co master
+        $ git merge my_new_feature
+
+    ; Github
+        # Download and install Git
+        $ git config --global user.name "Francisco Garcia"
+        $ git config --global user.email mymail@example.com
+        # Add your public key <url:http://github.com/account#keys>
+        ; If clone empty
+            $ git clone git@github.com:FGarcia/repository.git
+
+        ; If using existing one
+            $ git remote add origin git@github.com:FGarcia/Katas.git
+            $ git push origin master
+            
+        ; if you have no key yet ...
+            $ ssh-keygen -C "username@email.com" -t rsa
+
+            On Windows make sure .ssh folder is in your user folder at
+            "Documments and Settings"
