@@ -20,12 +20,10 @@
 " 
 " http://www.gnu.org/licenses/gpl.html
 "
+" Version:
 " History:
-"   v0.2
-"       Bibliography nodes
+"   (see plugin/pnote.vim)
 "
-"   v0.1  2010-05-23
-"      Initial version
 
 if exists("b:current_syntax")
   finish

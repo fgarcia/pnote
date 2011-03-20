@@ -14,18 +14,26 @@
 " MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 " GNU General Public License for more details.
 " 
-" Repository: git@github.com:FGarcia/Vim.git (pnote subfolder)
+" Webpage: 
+"   https://github.com/FGarcia/pnote/
+"   http://www.vim.org/scripts/script.php?script_id=3098
 "
 " Files:    
 "       plugin/pnote.vim
 "       syntax/pnote.vim
 "       ftplugin/pnote.vim
 "
-" Version:  0.1 (Alpha)
+" Version:  0.2 
 "
 " History:
+"   v0.2  2011-03-20
+"       Syntax for bibliography nodes
+"       Syntax for command line instructions
+"       Easy copy to command line instructions to the system clipboard
+"       Minor bugfixes
+"
 "   v0.1  2010-05-23
-"      Initial version
+"       Initial version
 " ------------------------------------------------------------------------------
 
 
