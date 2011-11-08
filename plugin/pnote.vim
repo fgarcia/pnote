@@ -15,7 +15,7 @@
 " GNU General Public License for more details.
 " 
 " Webpage: 
-"   https://github.com/FGarcia/pnote/
+"   https://github.com/fgarcia/pnote/
 "   http://www.vim.org/scripts/script.php?script_id=3098
 "
 " Files:    
@@ -26,14 +26,17 @@
 " Version:  0.2 
 "
 " History:
+"   v0.3  xxx TBR
+"       - Do not fold last line if contains vim parameters ($vim:...)
+"
 "   v0.2  2011-03-20
-"       Syntax for bibliography nodes
-"       Syntax for command line instructions
-"       Easy copy to command line instructions to the system clipboard
-"       Minor bugfixes
+"       - Syntax for bibliography nodes
+"       - Syntax for command line instructions
+"       - Easy copy to command line instructions to the system clipboard
+"       - Minor bugfixes
 "
 "   v0.1  2010-05-23
-"       Initial version
+"       - Initial version
 " ------------------------------------------------------------------------------
 
 
@@ -96,6 +99,15 @@ endfu
 " line.
 "
 function! Pnote_getFoldLevel(pos)
+
+    " Do not fold last line if contains vim parameters ($vim:...)
+    if a:pos == line("$")
+        let txt = getline(line("$"))
+        if match( txt, "vim:") == 0
+            return 0
+        endif
+    endif
+
     " Get section marker position
     let sectionColumn = -1
     let lineNum = a:pos + 1
