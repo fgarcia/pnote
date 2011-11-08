@@ -20,9 +20,9 @@
 " 
 " http://www.gnu.org/licenses/gpl.html
 "
-" Version:
 " History:
-"   (see plugin/pnote.vim)
+"   v0.3  xxx TBR
+"       - Hightlight line ";" sections 
 "
 
 if exists("b:current_syntax")
@@ -30,27 +30,27 @@ if exists("b:current_syntax")
 endif
 let b:current_syntax = "pnote"
 
-syn keyword	confTodo	contained TODO FIXME XXX 
-syn match	confComment	"^#\s.*" contains=confTodo
-syn region	confString	start=+"+ skip=+\\\\\|\\"+ end=+"+ oneline
-syn region	confString	start=+'+ skip=+\\\\\|\\'+ end=+'+ oneline
+syn keyword     confTodo        contained TODO FIXME XXX 
+syn match       confComment     "^#\s.*" contains=confTodo
+syn region      confString      start=+"+ skip=+\\\\\|\\"+ end=+"+ oneline
+syn region      confString      start=+'+ skip=+\\\\\|\\'+ end=+'+ oneline
 syn match       KEYWORD         "#\w\+#"hs=s+1,he=e-1
 syn match       SUB_COMMENT     "\s\+\(#\|--\)\s.*"hs=s+1
-syn match       ANOTATION       "\s\+;\s.*"
+syn match       ANOTATION       "\s*;\s.*"
 syn match       COMMAND         "\s*$\s[^#]*" contains=Comment
-syn match	LIST	        "^\s\+\*"
-syn match	BIBLIO	        "\[\w\+\]"
+syn match       LIST            "^\s\+\*"
+syn match       BIBLIO          "\[\w\+\]"
 
-"syn region	block	start=+^#+ end=+^\s*$+ contains=inside,confComment,ANOTATION
-"syn region	inside	start=+^ + skip=+$\+ + end=+^\s*$+ contained fold 
+"syn region     block   start=+^#+ end=+^\s*$+ contains=inside,confComment,ANOTATION
+"syn region     inside  start=+^ + skip=+$\+ + end=+^\s*$+ contained fold 
 
-"syn region	inside	start=+^ + end=+^\s*$+ fold 
+"syn region     inside  start=+^ + end=+^\s*$+ fold 
 
 " Define the default highlighting.
 " Only used when an item doesn't have highlighting yet
-hi def link confComment	Comment
-hi def link confTodo	Todo
-hi def link confString	String
+hi def link confComment Comment
+hi def link confTodo    Todo
+hi def link confString  String
 hi SUB_COMMENT guifg=darkcyan 
 hi ANOTATION guifg=lightgreen
 hi COMMAND guifg=lightcyan
