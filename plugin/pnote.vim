@@ -144,14 +144,16 @@ fu! Pnote_parseTags()
         if (lnum == 0)
             break
         endif
-        call searchpos('\W')
+        normal ee
         let tag_end_position = col('.')
         let found_tag = strpart( getline(lnum), col+1, tag_end_position)
         call add( g:pnote_tags, found_tag )
     endwhile
+    call setpos ('.', starting_position)
 endfu
 
 function! CleverTagMarker()
+    call Pnote_parseTags()
     if strpart( getline('.'), col('.')-2, 1 ) =~ '\w'
         return "@"
     elseif empty(g:pnote_tags)
