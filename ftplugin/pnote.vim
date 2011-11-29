@@ -40,3 +40,5 @@ nmap <Leader>y Y:call Pnote_YankCode()<CR>
 " Yank and reformat [current] selection
 vmap <Leader>y y:call Pnote_YankCode()<CR>
 
+set completefunc=Pnote_tagAutoComplete
+set omnifunc=Pnote_tagAutoComplete

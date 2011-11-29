@@ -24,11 +24,13 @@
 "   v0.3  xxx TBR
 "       - Bugfix: ";" sections at column 0
 "       - WARNING and TAG markers
+"       - Inherit from markdown syntax
 "
 
-if exists("b:current_syntax")
+if "b:current_syntax" == "pnote"
   finish
 endif
+runtime syntax/markdown.vim
 let b:current_syntax = "pnote"
 
 syn keyword     confTodo        contained TODO FIXME XXX 

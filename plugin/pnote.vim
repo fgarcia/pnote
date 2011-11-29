@@ -28,6 +28,7 @@
 " History:
 "   v0.3  xxx TBR
 "       - Do not fold last line if contains vim parameters ($vim:...)
+"       - Autocomplete
 "
 "   v0.2  2011-03-20
 "       - Syntax for bibliography nodes
@@ -39,6 +40,8 @@
 "       - Initial version
 " ------------------------------------------------------------------------------
 
+let s:regex_tag = '\s@\w\+'
+let g:pnote_tags = []
 
 " Yank lines into the "+" register removing leading "$". Result will be
 " displayed within the status line
@@ -76,7 +79,7 @@ function! Pnote_getSectionColumn(lineNum)
         return lineCol
     endif
 
-    let markerPos = match (lineText,';')
+    let markerPos = match (lineText,'; ')
     if markerPos == lineCol
         " Line starting with a section marker
         return markerPos
@@ -129,5 +132,43 @@ function! Pnote_getFoldLevel(pos)
         let level += 1
     endif
     return level
+endfu
+
+fu! Pnote_parseTags()
+    let g:pnote_tags = []
+    let starting_position = getpos ('.')
+
+    call cursor(1,1)
+    while (1)
+        let [lnum, col] = searchpos(s:regex_tag, 'W')
+        if (lnum == 0)
+            break
+        endif
+        call searchpos('\W')
+        let tag_end_position = col('.')
+        let found_tag = strpart( getline(lnum), col+1, tag_end_position)
+        call add( g:pnote_tags, found_tag )
+    endwhile
+endfu
+
+
+fu! Pnote_tagAutoComplete(findstart, base)
+    if a:findstart
+        " locate start of the word
+        let line = getline('.')
+        let start = col('.') - 1
+        while start > 0 && line[start - 1] =~ '\a'
+          let start -= 1
+        endwhile
+        return start
+    else
+        let res = []
+        for m in g:pnote_tags
+            if m =~ '^' . a:base
+                call add(res,m)
+            endif
+        endfor
+        return res
+    endif
 endfu
 
