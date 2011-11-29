@@ -40,5 +40,9 @@ nmap <Leader>y Y:call Pnote_YankCode()<CR>
 " Yank and reformat [current] selection
 vmap <Leader>y y:call Pnote_YankCode()<CR>
 
-set completefunc=Pnote_tagAutoComplete
-set omnifunc=Pnote_tagAutoComplete
+" Auto completion commands
+setlocal completefunc=Pnote_tagAutoComplete
+setlocal omnifunc=Pnote_tagAutoComplete
+setlocal completeopt=longest,menuone
+inoremap @ <C-R>=CleverTagMarker()<CR>
+

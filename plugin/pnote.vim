@@ -151,6 +151,15 @@ fu! Pnote_parseTags()
     endwhile
 endfu
 
+function! CleverTagMarker()
+    if strpart( getline('.'), col('.')-2, 1 ) =~ '\w'
+        return "@"
+    elseif empty(g:pnote_tags)
+        return "@"
+    else
+        return "@\<C-X>\<C-U>"
+    endif
+endfunction
 
 fu! Pnote_tagAutoComplete(findstart, base)
     if a:findstart
