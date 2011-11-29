@@ -10,7 +10,7 @@
 
     ; Create a new repositry
         $ git init
-        $ git add .
+        $ git add
         $ git commit
 
     ; Create a central shared repository
@@ -18,10 +18,11 @@
 
     ; If you already have a repository
         ; Make en exact copy with tags and branches
-        git push ssh://example.org/git/foo.git '*:*'
- 
+        $ git push ssh://example.org/git/foo.git '*:*'
+
         ; Copy/duplicate/clone 
         $ git clone ssh://you@host.org/proj.git
+
 # Keywords
     master     ; default development branch
     origin     ; default upstream repository
@@ -78,7 +79,7 @@
     git diff --base $file
     git diff --ours $file
     git diff --theirs $file
- 
+
     git add conflict_file.txt       ; Solve conflict
     git rebase --continue
 
@@ -88,7 +89,7 @@
     git checkout --ours index.html
     git checkout --theirs _layouts/default.html
 
-    ; Merge repositores A, B, C
+    ; Merge three repositories A, B, C
         mkdir combined && cd combined
         git init
         git fetch ../A master:A
@@ -145,3 +146,5 @@
 
             On Windows make sure .ssh folder is in your user folder at
             "Documments and Settings"
+
+vim:ft=pnote
