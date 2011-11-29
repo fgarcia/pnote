@@ -22,7 +22,8 @@
 "
 " History:
 "   v0.3  xxx TBR
-"       - Hightlight line ";" sections 
+"       - Bugfix: ";" sections at column 0
+"       - WARNING markers
 "
 
 if exists("b:current_syntax")
@@ -34,11 +35,13 @@ syn keyword     confTodo        contained TODO FIXME XXX
 syn match       confComment     "^#\s.*" contains=confTodo
 syn region      confString      start=+"+ skip=+\\\\\|\\"+ end=+"+ oneline
 syn region      confString      start=+'+ skip=+\\\\\|\\'+ end=+'+ oneline
+
 syn match       KEYWORD         "#\w\+#"hs=s+1,he=e-1
 syn match       SUB_COMMENT     "\s\+\(#\|--\)\s.*"hs=s+1
 syn match       ANOTATION       "\s*;\s.*"
 syn match       COMMAND         "\s*$\s[^#]*" contains=Comment
 syn match       LIST            "^\s\+\*"
+syn match       WARNING         "^\s*!!!\s.*$"
 syn match       BIBLIO          "\[\w\+\]"
 
 "syn region     block   start=+^#+ end=+^\s*$+ contains=inside,confComment,ANOTATION
@@ -55,6 +58,7 @@ hi SUB_COMMENT guifg=darkcyan
 hi ANOTATION guifg=lightgreen
 hi COMMAND guifg=lightcyan
 hi LIST guifg=magenta
+hi WARNING guifg=red
 hi BIBLIO guifg=magenta
 hi KEYWORD guifg=lightred 
 
