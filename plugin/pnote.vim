@@ -28,7 +28,7 @@
 " History:
 "   v0.3  xxx TBR
 "       - Do not fold last line if contains vim parameters ($vim:...)
-"       - Autocomplete
+"       - Tag omnicomplete
 "
 "   v0.2  2011-03-20
 "       - Syntax for bibliography nodes
@@ -41,7 +41,6 @@
 " ------------------------------------------------------------------------------
 
 let s:regex_tag = '\s@\w\+'
-let g:pnote_tags = []
 
 " Yank lines into the "+" register removing leading "$". Result will be
 " displayed within the status line
@@ -134,8 +133,10 @@ function! Pnote_getFoldLevel(pos)
     return level
 endfu
 
+
+" List of tag words within the current buffer
 fu! Pnote_parseTags()
-    let g:pnote_tags = []
+    let tag_list = []
     let starting_position = getpos ('.')
 
     call cursor(1,1)
@@ -147,22 +148,24 @@ fu! Pnote_parseTags()
         normal ee
         let tag_end_position = col('.')
         let found_tag = strpart( getline(lnum), col+1, tag_end_position)
-        call add( g:pnote_tags, found_tag )
+        call add( tag_list, found_tag )
     endwhile
     call setpos ('.', starting_position)
+    return tag_list
 endfu
 
-function! CleverTagMarker()
-    call Pnote_parseTags()
+
+" Function replacement when pressing the tag marker '@'
+fu! CleverTagMarker()
     if strpart( getline('.'), col('.')-2, 1 ) =~ '\w'
-        return "@"
-    elseif empty(g:pnote_tags)
         return "@"
     else
         return "@\<C-X>\<C-U>"
     endif
-endfunction
+endfu
 
+
+" Custom auto-complete function for @tags keywords
 fu! Pnote_tagAutoComplete(findstart, base)
     if a:findstart
         " locate start of the word
@@ -174,7 +177,7 @@ fu! Pnote_tagAutoComplete(findstart, base)
         return start
     else
         let res = []
-        for m in g:pnote_tags
+        for m in Pnote_parseTags()
             if m =~ '^' . a:base
                 call add(res,m)
             endif
