@@ -23,7 +23,7 @@
 " History:
 "   v0.3  xxx TBR
 "       - Bugfix: ";" sections at column 0
-"       - WARNING markers
+"       - WARNING and TAG markers
 "
 
 if exists("b:current_syntax")
@@ -43,6 +43,7 @@ syn match       COMMAND         "\s*$\s[^#]*" contains=Comment
 syn match       LIST            "^\s\+\*"
 syn match       WARNING         "^\s*!!!\s.*$"
 syn match       BIBLIO          "\[\w\+\]"
+syn match       TAG             "\s@\w\+" contains=@NoSpell
 
 "syn region     block   start=+^#+ end=+^\s*$+ contains=inside,confComment,ANOTATION
 "syn region     inside  start=+^ + skip=+$\+ + end=+^\s*$+ contained fold 
@@ -61,6 +62,7 @@ hi LIST guifg=magenta
 hi WARNING guifg=red
 hi BIBLIO guifg=magenta
 hi KEYWORD guifg=lightred 
+hi TAG guifg=lightmagenta
 
 
 " vim: ts=8 sw=2
