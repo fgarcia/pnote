@@ -30,7 +30,7 @@
 if "b:current_syntax" == "pnote"
   finish
 endif
-runtime syntax/markdown.vim
+"runtime syntax/markdown.vim
 let b:current_syntax = "pnote"
 
 syn keyword     confTodo        contained TODO FIXME XXX 
@@ -45,7 +45,7 @@ syn match       COMMAND         "\s*$\s[^#]*" contains=Comment
 syn match       LIST            "^\s\+\*"
 syn match       WARNING         "^\s*!!!\s.*$"
 syn match       BIBLIO          "\[\w\+\]"
-syn match       TAG             "\s@\w\+" contains=@NoSpell
+syn match       PNOTETAG        "\s@\w\+"
 
 "syn region     block   start=+^#+ end=+^\s*$+ contains=inside,confComment,ANOTATION
 "syn region     inside  start=+^ + skip=+$\+ + end=+^\s*$+ contained fold 
@@ -64,7 +64,7 @@ hi LIST guifg=magenta
 hi WARNING guifg=red
 hi BIBLIO guifg=magenta
 hi KEYWORD guifg=lightred 
-hi TAG guifg=lightmagenta
+hi PNOTETAG guifg=lightmagenta
 
 
 " vim: ts=8 sw=2

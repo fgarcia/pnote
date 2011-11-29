@@ -145,10 +145,13 @@ fu! Pnote_parseTags()
         if (lnum == 0)
             break
         endif
-        normal ee
+        normal le
         let tag_end_position = col('.')
-        let found_tag = strpart( getline(lnum), col+1, tag_end_position)
-        call add( tag_list, found_tag )
+        let tag_length = tag_end_position - col
+        let found_tag = strpart( getline(lnum), col+1, tag_length)
+        if index( tag_list, found_tag ) == -1
+            call add( tag_list, found_tag )
+        endif
     endwhile
     call setpos ('.', starting_position)
     return tag_list
