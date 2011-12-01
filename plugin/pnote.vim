@@ -29,6 +29,7 @@
 "   v0.3  xxx TBR
 "       - Do not fold last line if contains vim parameters ($vim:...)
 "       - Tag omnicomplete
+"       - Better documentation
 "
 "   v0.2  2011-03-20
 "       - Syntax for bibliography nodes
@@ -159,16 +160,18 @@ endfu
 
 
 " Function replacement when pressing the tag marker '@'
-fu! CleverTagMarker()
+fu! Pnote_CleverTagMarker()
     if strpart( getline('.'), col('.')-2, 1 ) =~ '\w'
         return "@"
     else
+        " Nothing behind @, it should be beginning of tag
         return "@\<C-X>\<C-U>"
     endif
 endfu
 
 
 " Custom auto-complete function for @tags keywords
+"   Search for :help complete-functions
 fu! Pnote_tagAutoComplete(findstart, base)
     if a:findstart
         " locate start of the word
@@ -179,6 +182,7 @@ fu! Pnote_tagAutoComplete(findstart, base)
         endwhile
         return start
     else
+        " List of matching words starting with a:base
         let res = []
         for m in Pnote_parseTags()
             if m =~ '^' . a:base
